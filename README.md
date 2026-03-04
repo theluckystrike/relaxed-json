@@ -81,6 +81,16 @@ Stringify an object to JSON string.
 
 BSD-3-Clause - See [LICENSE](LICENSE) for full details.
 
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
 ## See Also
 
 ### Related Zovo Repositories
@@ -95,16 +105,6 @@ BSD-3-Clause - See [LICENSE](LICENSE) for full details.
 - [Zovo Focus](https://chrome.google.com/webstore/detail/zovo-focus) - Block distractions
 
 Visit [zovo.one](https://zovo.one) for more information.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ---
 
