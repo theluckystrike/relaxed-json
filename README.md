@@ -28,6 +28,31 @@ Part of the [Zovo](https://zovo.one) developer tools family.
 npm install @theluckystrike/relaxed-json
 ```
 
+## Quick Start
+
+Get started with Relaxed JSON in minutes:
+
+```bash
+# Clone the repository
+git clone https://github.com/theluckystrike/relaxed-json.git
+cd relaxed-json
+
+# Run the basic usage example
+node examples/basic-usage.js
+```
+
+### What the example demonstrates:
+
+1. **Parse** - Parse JSON with comments, trailing commas, and unquoted keys
+2. **Transform** - Convert relaxed JSON to strict JSON string
+3. **Stringify** - Convert JavaScript objects to JSON strings
+4. **Reviver** - Transform values during parsing
+5. **Tolerant** - Continue parsing on errors
+6. **Duplicate Keys** - Handle duplicate object keys
+7. **Practical Use** - Parse a real config file with comments
+
+See [`examples/basic-usage.js`](examples/basic-usage.js) for the complete working example.
+
 ## Usage
 
 ```typescript
