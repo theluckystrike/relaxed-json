@@ -1,136 +1,64 @@
-# @theluckystrike/relaxed-json
+# relaxed-json
 
-[![npm version](https://img.shields.io/npm/v/@theluckystrike/relaxed-json)](https://npmjs.com/package/@theluckystrike/relaxed-json)
-[![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
-[![Discord](https://img.shields.io/badge/Discord-Zovo-blueviolet.svg?logo=discord)](https://discord.gg/zovo)
-[![Website](https://img.shields.io/badge/Website-zovo.one-blue)](https://zovo.one)
-[![GitHub Stars](https://img.shields.io/github/stars/theluckystrike/relaxed-json?style=social)](https://github.com/theluckystrike/relaxed-json)
+A strict superset of JSON that allows comments, trailing commas, unquoted keys, and single-quoted strings. Parses relaxed input into standard JavaScript objects, or transforms it into valid JSON text.
 
-> Relaxed JSON is a strict superset of JSON that relaxes the strictness of vanilla JSON, allowing comments, trailing commas, and more.
-
-Fork of [fregante/relaxed-json](https://github.com/fregante/relaxed-json) with TypeScript type definitions included.
-
-Part of the [Zovo](https://zovo.one) developer tools family.
-
-## Features
-
-- **Comments** -- Support for both `// single-line` and `/* multi-line */` comments
-- **Trailing Commas** -- Allow trailing commas in objects and arrays
-- **Relaxed Keys** -- Unquoted keys are allowed
-- **Implicit Arrays** -- Objects can be parsed as arrays of their values
-- **Tolerant Parsing** -- Continue parsing even when encountering errors
-- **TypeScript Support** -- Full type definitions included
-
-## Install
-
-```bash
-npm install @theluckystrike/relaxed-json
-```
-
-## Quick Start
-
-Get started with Relaxed JSON in minutes:
-
-```bash
-# Clone the repository
-git clone https://github.com/theluckystrike/relaxed-json.git
-cd relaxed-json
-
-# Run the basic usage example
-node examples/basic-usage.js
-```
-
-### What the example demonstrates:
-
-1. **Parse** - Parse JSON with comments, trailing commas, and unquoted keys
-2. **Transform** - Convert relaxed JSON to strict JSON string
-3. **Stringify** - Convert JavaScript objects to JSON strings
-4. **Reviver** - Transform values during parsing
-5. **Tolerant** - Continue parsing on errors
-6. **Duplicate Keys** - Handle duplicate object keys
-7. **Practical Use** - Parse a real config file with comments
-
-See [`examples/basic-usage.js`](examples/basic-usage.js) for the complete working example.
-
-## Usage
-
-```typescript
-import RJSON from '@theluckystrike/relaxed-json';
-
-// Parse relaxed JSON with comments
-const json = RJSON.parse(`
-  {
-    // This is a comment
-    "name": "value", // trailing comment
-    "items": [1, 2, 3,], // trailing comma!
-  }
-`);
-
-// Transform relaxed JSON to strict JSON
-const strictJson = RJSON.transform(`
-  {
-    name: "value" // unquoted key
-  }
-`);
-
-// Stringify to JSON
-const str = RJSON.stringify({ hello: "world" });
-```
-
-## Options
-
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `reviver` | `function` | `undefined` | A function to transform values |
-| `relaxed` | `boolean` | `true` | Enable relaxed parsing |
-| `warnings` | `boolean` | `false` | Show warnings during parsing |
-| `tolerant` | `boolean` | `false` | Continue parsing on errors |
-| `duplicate` | `boolean` | `false` | Allow duplicate keys |
-
-## API
-
-### `RJSON.transform(text: string): string`
-
-Transforms Relaxed JSON text into strict JSON text. Doesn't verify the result is valid JSON.
-
-### `RJSON.parse(text: string, options?: Options): unknown`
-
-Parse the RJSON text. Supports all options listed above.
-
-### `RJSON.stringify(obj: unknown): string`
-
-Stringify an object to JSON string.
-
-## License
-
-BSD-3-Clause - See [LICENSE](LICENSE) for full details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## See Also
-
-### Related Zovo Repositories
-
-- [chrome-extension-starter-mv3](https://github.com/theluckystrike/chrome-extension-starter-mv3) - Production-ready Chrome extension starter
-- [chrome-storage-plus](https://github.com/theluckystrike/chrome-storage-plus) - Type-safe storage wrapper
-- [awesome-chrome-extensions-dev](https://github.com/theluckystrike/awesome-chrome-extensions-dev) - Curated list of Chrome extension development resources
-
-### Zovo Chrome Extensions
-
-- [Zovo Tab Manager](https://chrome.google.com/webstore/detail/zovo-tab-manager) - Manage tabs efficiently
-- [Zovo Focus](https://chrome.google.com/webstore/detail/zovo-focus) - Block distractions
-
-Visit [zovo.one](https://zovo.one) for more information.
+Forked from [fregante/relaxed-json](https://github.com/fregante/relaxed-json), originally created by Oleg Grenrus. This fork includes TypeScript type definitions and a test suite.
 
 ---
 
-Built by [Zovo](https://zovo.one)
+INSTALL
+
+    npm install @theluckystrike/relaxed-json
+
+WHAT IT DOES
+
+The library accepts JSON-like text that would normally fail strict parsing and handles it gracefully. Supported relaxations include single-line comments (//), block comments (/* */), trailing commas in objects and arrays, unquoted object keys, and single-quoted strings.
+
+Three functions are exported.
+
+RJSON.parse(text, opts) parses relaxed JSON text into a JavaScript value. You can pass a reviver function as the second argument, or an options object with the following fields.
+
+    relaxed     boolean, default true    enable relaxed parsing rules
+    warnings    boolean, default false   collect parse warnings
+    tolerant    boolean, default false   continue parsing after errors
+    duplicate   boolean, default false   flag duplicate object keys
+    reviver     function                 transform values during parse
+
+RJSON.transform(text) converts relaxed JSON text into a strict JSON string without parsing it into objects. Useful when you need to normalize input before handing it to another JSON consumer.
+
+RJSON.stringify(obj) serializes a JavaScript value to a JSON string with sorted keys.
+
+USAGE
+
+    const RJSON = require('@theluckystrike/relaxed-json');
+
+    // parse JSON with comments and trailing commas
+    const config = RJSON.parse(`{
+      // database settings
+      host: "localhost",
+      port: 5432,
+      features: ["auth", "logging",],
+    }`);
+
+    // transform relaxed text to strict JSON string
+    const strict = RJSON.transform("{name: 'test'}");
+    // => '{"name": "test"}'
+
+    // stringify with sorted keys
+    RJSON.stringify({ b: 2, a: 1 });
+    // => '{"a":1,"b":2}'
+
+TESTING
+
+    npm install
+    npm test
+
+Tests use Vitest and cover parsing, transformation, stringification, error handling, and all parse options.
+
+LICENSE
+
+BSD-3-Clause. See LICENSE for full text. Original copyright belongs to Oleg Grenrus.
+
+---
+
+Fork maintained by [theluckystrike](https://github.com/theluckystrike) | [zovo.one](https://zovo.one)
